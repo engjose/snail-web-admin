@@ -22,7 +22,7 @@ export default class HomeSider extends Component {
     }
 
     render() {
-        const {height} = this.state; 
+        const { height } = this.state; 
 
         const contentStyle = {
             padding: 24,
