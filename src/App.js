@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Test from './components/Test'
+import HomeSider from './components/HomeSider'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Test />
+        <HomeSider />
       </div>
     );
   }

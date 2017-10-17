@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Link } from 'react-router';
+import {
+    Menu,
+    Icon,
+    Layout,
+} from 'antd';
 const { Header, Sider, Content } = Layout;
+const SubMenu = Menu.SubMenu;
 
 export default class HomeSider extends Component {
     state = {
@@ -55,10 +61,14 @@ export default class HomeSider extends Component {
                 >
                     <div className="logo" style={logoStyle}/>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1">
-                            <Icon type="user" />
-                            <span>nav 1</span>
-                        </Menu.Item>
+                        <SubMenu
+                            key="user"
+                            title={<span><Icon type="user" /><span>用户管理</span></span>}
+                        >
+                            <Menu.Item key="employeeMgr"><Link to={'/employees'}>员工管理</Link></Menu.Item>
+                            <Menu.Item key="userMgr">用户管理</Menu.Item>
+                        </SubMenu>
+
                         <Menu.Item key="2">
                             <Icon type="video-camera" />
                             <span>nav 2</span>
