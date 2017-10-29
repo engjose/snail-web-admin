@@ -1,0 +1,65 @@
+.article_title_out {
+    display: flex;
+    margin-bottom: 30px;
+}
+.article_title_btn {
+    width: 50px;
+    height: 50px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    color: white;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.article_title_btn_ck {
+    background-color: #29BC6E;
+}
+
+.article_title_btn_mark {
+    background-color: #FD9827;
+}
+
+.article_submit_btn {
+    float: right;
+}
+
+/** 文章属性 */
+.article_attr_out {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.article_element {
+    width: 400px;
+    height: 250px;
+    text-align: center;
+}
+
+.article_img_div {
+    width: 350px;
+    height: 200px;
+    border: 1px solid #E8E8E8;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.article_img {
+    width: 100%;
+    height: 100%;
+}
+
+.article_element_tag {
+    background-color: #ECF6FD;
+    border: 1px solid #D3EAFB;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    line-height: 30px;
+    font-weight: 700;
+}

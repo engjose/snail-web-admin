@@ -65,12 +65,12 @@ class EmployeeList extends Component {
                                 )
                             }
                         </FormItem>
-                        <Button type="primary" icon="search" shape="circle" style={{marginRight:5}} htmlType="submit" />
-                        <Button type="primary" icon="search" htmlType="submit" >查询</Button>
+                        <Button type="primary" icon="search" htmlType="submit" style={{marginRight:15}} >查询</Button>
+                        <Button type="primary" size="large" icon="user-add" shape="circle" onClick={this.toAdd} />
                     </Form>
                 </Card>
 
-                <Card>
+                <Card bordered={false}>
                     <Table 
                     columns={EMPLOYEE_LIST_COLUMN} 
                     dataSource={employeeList}
@@ -167,7 +167,7 @@ class EmployeeList extends Component {
                   pageSize: pagination.pageSize,
                   defaultCurrent: pagination.current,
                 },
-              });
+            });
         }).catch((error) => {
             this.showError("出错了!", error.message);
         });
@@ -187,6 +187,10 @@ class EmployeeList extends Component {
             icon: <Icon type="frown-o" style={{ color: 'red' }} />,
         });
     };
+
+    toAdd = () => {
+        window.location.href = "#/employees/add";
+    }
 }
 
 export default Form.create()(EmployeeList);
