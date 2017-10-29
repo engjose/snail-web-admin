@@ -1,0 +1,75 @@
+.myhead_card {
+    height: 300px;
+}
+
+.upload_head_out_div {
+    text-align: center;
+    height: 300px;
+}
+
+/* 上传组件按钮的颜色 */
+.upload_head_btn {
+    background-color: #595959;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    line-height: 30px;
+    margin: 0 auto;
+    cursor: pointer;
+    
+}
+
+.upload_head_btn:hover {
+    background-color: #008BE5;
+}
+
+/* 我的头像外层img-div */
+.upload_head_img {
+    border: 1px solid #E8E8E8;
+    width: 130px;
+    height: 130px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* flex布局 */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* 头像img */
+.head_img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+/* 座右铭 */
+.motto_out {
+    font-weight: 700;
+    text-align: left;
+}
+
+.add_employee_btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #595959;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
+
+.add_employee_btn:hover {
+    background-color: #19be6b;
+}
+

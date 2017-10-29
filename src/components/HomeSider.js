@@ -66,17 +66,15 @@ export default class HomeSider extends Component {
                             title={<span><Icon type="user" /><span>用户管理</span></span>}
                         >
                             <Menu.Item key="employeeMgr"><Link to={'/employees'}>员工管理</Link></Menu.Item>
-                            <Menu.Item key="userMgr">用户管理</Menu.Item>
                         </SubMenu>
-
-                        <Menu.Item key="2">
-                            <Icon type="video-camera" />
-                            <span>nav 2</span>
-                        </Menu.Item>
-                        <Menu.Item key="3">
-                            <Icon type="upload" />
-                            <span>nav 3</span>
-                        </Menu.Item>
+                        <SubMenu
+                            key="articles"
+                            title={<span><Icon type="tag" /><span>文章管理</span></span>}
+                        >
+                            <Menu.Item key="artileCreate"><Link to={'/articles/add'}>发表文章</Link></Menu.Item>
+                            <Menu.Item key="artileList"><Link to={'/articles/list'}>文章列表</Link></Menu.Item>
+                            <Menu.Item key="artileTags"><Link to={'/articles/tags'}>标签管理</Link></Menu.Item>
+                        </SubMenu>
                     </Menu>
                 </Sider>
                 <Layout>
