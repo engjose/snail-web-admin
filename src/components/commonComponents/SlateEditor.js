@@ -31,21 +31,25 @@ export default class SlateEditor extends Component {
   state = {
     state: initialState,
     schema: {
-        nodes: {
-          code: CodeNode
-        }
+      marks: {
+        bold: props => <strong>{props.children}</strong>
+      }
     }
   }
 
-  // 发生变更时，使用新的编辑器状态更新应用的 React 状态。
-  onChange = ({ state }) => {
-    this.setState({ state })
-  }
+    // 发生变更时，使用新的编辑器状态更新应用的 React 状态。
+    onChange = ({ state }) => {
+      this.setState({ state })
+    }
 
-  onKeyDown = (event, change, data) => {
-    //ctrl + shift + c
-    if (event.which != 67 || !event.metaKey || !event.altKey){
-        return;
+    onKeyDown = (event, change, data) => {
+      //ctrl + shift + c
+      if (event.which != 67 || !event.metaKey || !event.altKey){
+          return;
+    }
+
+    function BoldMark(props) {
+      return <strong>{props.children}</strong>
     }
 
     event.preventDefault()

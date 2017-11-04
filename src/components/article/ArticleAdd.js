@@ -5,6 +5,7 @@ import {
     Tag,
     Button,
     Input,
+    message,
     notification,
 } from 'antd';
 
@@ -31,7 +32,7 @@ export default class ArticleAdd extends Component {
     }
 
     render() {
-        const {isCkEditor, editorTitle, selectTagValue} = this.state;
+        const {isCkEditor, editorTitle, selectTagValue, articleImg} = this.state;
         return (
             <div>
                 <Card bordered={false} title="文章描述" style={{marginBottom:50}}>
@@ -54,11 +55,11 @@ export default class ArticleAdd extends Component {
                             <UploadImg 
                                 type = "articleImg" 
                                 btnName="上传文章展示图片"
-                                action=""
+                                action={ACTION_URL.SSO + '/employee/uploadImg'}
                                 saveFun = {this.saveImgUrl} 
                             />
                             <div className="article_img_div">
-                                <img src="http://admin.img.thinkerol.com/1.jpg" className="article_img" />
+                                <img src={articleImg} className="article_img" />
                             </div>
                         </div>
 
@@ -120,19 +121,35 @@ export default class ArticleAdd extends Component {
     }
 
     /**
-     * preView article
+     * 预览文章
      */
     preView = () => {
         console.log(this.state.htmlValue);
     }
 
+    /**
+     * 发表文章
+     */
     createArticle = () => {
         let url = `${ACTION_URL.SHARE}/shareMgr/articles`;
-        $post(url, {title: "haha"}, errIcon).then(data => {
-            if(data) {
-                window.location.href = "#/articles/list";
+        let {title, description, articleImg, selectTagId, selectTagValue, htmlValue} = this.state;
+        if(title && description && articleImg && selectTagId && selectTagValue && htmlValue) {
+            let params = {
+                title: title,
+                shareIcon: articleImg, 
+                shareDesc:description, 
+                tagId:selectTagId, 
+                tagName:selectTagValue, 
+                content:htmlValue
             }
-        });
+            $post(url, params, errIcon).then(data => {
+                if(data) {
+                    window.location.href = "#/articles/list";
+                }
+            });
+        } else {
+            message.warning('文章信息必须完整!');
+        }
     }
 
     /**

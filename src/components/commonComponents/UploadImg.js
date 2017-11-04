@@ -43,12 +43,7 @@ export default class UploadImg extends Component {
      * handle uploadComponent
      */
     handleChange = (info) => {
-        let fileList = info.fileList;
-        if (info.file.status === 'done') {
-          let size = this.state.uploadListSize;
-          this.setState({uploadListSize: size + 1});
-          this.asynchronyUpload(info)
-        }
+        this.asynchronyUpload(info);
     };
 
     /**
@@ -62,7 +57,8 @@ export default class UploadImg extends Component {
         formData.append('file', file.originFileObj);
         
         axios.post(url, formData).then((data) => {
-            this.props.saveFun(this.props.type, data.url);
+            console.log(data.data.data);
+            this.props.saveFun(this.props.type, data.data.data);
         }).catch((error) => {
             this.showError("错误信息!", error.message);
         });

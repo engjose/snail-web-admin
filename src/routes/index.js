@@ -23,7 +23,7 @@ export default class CRouter extends Component {
         return (
             <Router history={hashHistory}>
                 <Route path={'/'} components={App} />
-                <Route path={'/silder'} components={HomeSider}>
+                <Route path={'/home'} components={HomeSider}>
                     <Route path={'/socket'} components={Socket} />
                     <Route path={'/htmlEditor'} components={HtmlEditor} /> 
                     <Route path={'/markDownEditor'} components={MarkDownEditor} /> 
