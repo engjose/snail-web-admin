@@ -43,12 +43,19 @@ class HomeSider extends Component {
         this.setState({height: contentHeight});
         
         //设置用户相关信息
-        let loginName = sessionStorage.getItem("loginName") ? sessionStorage.getItem("loginName") : this.state.loginName;
-        let headUrl = sessionStorage.getItem("headUrl") ? sessionStorage.getItem("headUrl"): this.state.headUrl;
-        this.setState({
-            loginName: loginName,
-            headUrl: headUrl,
-        });
+        let loginName = localStorage.getItem("loginName") ? localStorage.getItem("loginName") : this.state.loginName;
+        let headUrl = localStorage.getItem("headUrl") ? localStorage.getItem("headUrl"): this.state.headUrl;
+        let expireTime = localStorage.getItem("expireTime");
+        console.log(expireTime);
+        console.log(Date.parse(new Date()));
+        if(expireTime && expireTime >= Date.parse(new Date())) {
+            this.setState({
+                loginName: loginName,
+                headUrl: headUrl,
+            });
+        } else {
+            localStorage.clear();
+        }
     }
 
     render() {
@@ -92,7 +99,7 @@ class HomeSider extends Component {
                 >
                     <div className="logo" style={logoStyle}/>
                     {
-                        sessionStorage.getItem("xToken") ?
+                        localStorage.getItem("xToken") ?
                             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                                 <SubMenu
                                     key="user"
@@ -123,7 +130,7 @@ class HomeSider extends Component {
 
                         <div style={{float:"right", textAlign:'center', height:'100%',marginTop:10 }}>
                             {
-                                sessionStorage.getItem("xToken") ?
+                                localStorage.getItem("xToken") ?
                                     <span>
                                         欢迎: <span style={{color: 'red'}}>{loginName}</span>
                                         <span style={{float:"right", width:50, height: 50, marginRight:30, marginLeft:10}}>
@@ -220,9 +227,12 @@ class HomeSider extends Component {
         $post(url, params, errIcon).then(data => {
             if(data) {
                 if(data.code === 200) {
-                    sessionStorage.setItem("xToken", data.xToken);
-                    sessionStorage.setItem("loginName", data.loginName);
-                    sessionStorage.setItem("headUrl", data.headUrl);
+                    this.setLoginModal(false);
+                    localStorage.setItem("xToken", data.xToken);
+                    localStorage.setItem("loginName", data.loginName);
+                    localStorage.setItem("headUrl", data.headUrl);
+                    let exipreTime = Date.parse(new Date()) + 30 * 60 * 1000;
+                    localStorage.setItem("expireTime", exipreTime);
                     window.location.href = "#/home";
                 }else {
                     message.error(data.message);

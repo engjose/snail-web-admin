@@ -101,6 +101,10 @@ class EmployeeList extends Component {
         EMPLOYEE_LIST_COLUMN.push(option);
     }
 
+    componentWillUnmount() {
+        EMPLOYEE_LIST_COLUMN.pop();
+    }
+
     /**
      * 组件加载完成之后
      */
@@ -147,7 +151,7 @@ class EmployeeList extends Component {
         let phoneNumber = formValue.getFieldValue('phoneNumber') ? formValue.getFieldValue('phoneNumber') : '';
         let loginName = formValue.getFieldValue('loginName') ? formValue.getFieldValue('loginName') : '';
 
-        let url = `${ACTION_URL.SSO}employee/employees`;
+        let url = `${ACTION_URL.SSO}/employee/employees`;
         axios.get(url, {
             params:{
                 name,

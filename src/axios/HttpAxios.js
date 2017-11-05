@@ -38,7 +38,8 @@ import { notification } from 'antd';
  * @param {*} params 
  */
 export const $post = (url, params, icon = '') => {
-    url = url.indexOf("?") >= 0 ? `${url}&xToken=${localStorage.getItem('xToken')}&app=SNAIL_ADMIN` : `${url}?xToken=${localStorage.getItem('xToken')}&app=SNAIL_ADMIN`;
+    let xToken = localStorage.getItem("xToken") ? localStorage.getItem("xToken") : '';
+    url = url.indexOf("?") >= 0 ? `${url}&xToken=${xToken}&app=SNAIL_ADMIN` : `${url}?xToken=${xToken}&app=SNAIL_ADMIN`;
     let data = axios.post(url, params).then(res => res.data).catch(error => {
         let message = error.message === 'Network Error' ? '登录失效!' : error.message;
         notification.open({
@@ -58,7 +59,8 @@ export const $post = (url, params, icon = '') => {
  * @param {*} params 
  */
 export const $get = (url, params) => {
-    url = url.indexOf("?") >= 0 ? `${url}&xToken=${localStorage.getItem('xToken')}&app=SNAIL_ADMIN` : `${url}?xToken=${localStorage.getItem('xToken')}&app=SNAIL_ADMIN`;
+    let xToken = localStorage.getItem("xToken") ? localStorage.getItem("xToken") : '';
+    url = url.indexOf("?") >= 0 ? `${url}&xToken=${xToken}&app=SNAIL_ADMIN` : `${url}?xToken=${xToken}&app=SNAIL_ADMIN`;
     let data = axios.get(url, params).then(res => res.data).catch(error => {
         let message = error.message === 'Network Error' ? '登录失效!' : error.message;
         notification.open({

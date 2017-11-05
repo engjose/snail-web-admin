@@ -1,4 +1,4 @@
 export const ACTION_URL = {
-    SSO: "http://192.168.100.103:8081/snailsso",
-    SHARE: "http://192.168.100.103:8083/snailshare",
+    SSO: "http://139.196.141.5:8022",
+    SHARE: "http://139.196.141.5:8020",
 };

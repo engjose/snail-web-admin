@@ -5,6 +5,7 @@ import {
     notification,
 } from 'antd';
 import axios from 'axios';
+import { $post } from '../../axios/HttpAxios';
 
 export default class UploadImg extends Component {
     constructor(props) {
@@ -55,12 +56,11 @@ export default class UploadImg extends Component {
         const formData = new FormData();
         formData.append('name', 'upload');
         formData.append('file', file.originFileObj);
-        
-        axios.post(url, formData).then((data) => {
-            console.log(data.data.data);
-            this.props.saveFun(this.props.type, data.data.data);
-        }).catch((error) => {
-            this.showError("错误信息!", error.message);
+    
+        $post(url, formData).then(data => {
+            if(data) {
+                this.props.saveFun(this.props.type, data.data);
+            }
         });
     };
 

@@ -13,8 +13,7 @@ import HtmlEditor from '../commonComponents/HtmlEditor';
 import MarkDownEditor from '../commonComponents/MarkDownEditor';
 import UploadImg from '../commonComponents/UploadImg'
 
-import axios from 'axios';
-import { $post } from '../../axios/HttpAxios';
+import { $post, $get } from '../../axios/HttpAxios';
 import { ACTION_URL } from '../ActionUrl';
 
 const errIcon = <Icon type="frown-o" style={{color:'red'}} />;
@@ -24,6 +23,8 @@ export default class ArticleAdd extends Component {
         this.state = {
             isCkEditor: true,
             htmlValue: '',
+            tags:[],
+            tagsColor: ["#2db7f5", "#f50", "#FB9738", "#34BA71", "#364C77", "#587C0C"],
             editorTitle: 'CK编辑器',
             articleImg: '',
             selectTagId: '',
@@ -32,7 +33,7 @@ export default class ArticleAdd extends Component {
     }
 
     render() {
-        const {isCkEditor, editorTitle, selectTagValue, articleImg} = this.state;
+        const {isCkEditor, editorTitle, selectTagValue, articleImg, tags, tagsColor} = this.state;
         return (
             <div>
                 <Card bordered={false} title="文章描述" style={{marginBottom:50}}>
@@ -67,14 +68,14 @@ export default class ArticleAdd extends Component {
                             <div className="article_element_tag">
                                 请选择标签:
                             </div>
-                            <span onClick={(id, value) => this.handleChangeTag("1", "#f50")}>
-                                <Tag key="1" color="#f50">#f50</Tag>
-                            </span>
-                            <span onClick={(id, value) => this.handleChangeTag("2", "#2db7f5")}>
-                                <Tag key="2" color="#2db7f5">#2db7f5</Tag>
-                            </span>
-                            
-                            <div style={{marginTop:150}}>
+                            {
+                                this.state.tags.map((record, index) => 
+                                    <span onClick={(id, value) => this.handleChangeTag(record.id, record.tagName)} style={{marginTop:10, display:'inline-block'}}>
+                                        <Tag key={record.id} color={tagsColor[Math.floor(Math.random() * tagsColor.length + 1)-1]}>{record.tagName}</Tag>
+                                    </span>  
+                                )
+                            }
+                            <div style={{marginTop:100}}>
                                 已选择标签: <Tag color="#595959">{selectTagValue}</Tag>
                             </div>
                         </div>
@@ -102,6 +103,20 @@ export default class ArticleAdd extends Component {
                 </Card>
             </div>
         );
+    }
+
+    componentWillMount() {
+        let url = `${ACTION_URL.SHARE}/shareMgr/tags`;
+        $get(url, {}, errIcon).then(data => {
+            if(data) {
+                this.setState({tags: data.data});
+            }
+        });
+    }
+
+    getTags = () => {
+        console.log("哈哈");
+        return <span>aa</span>
     }
 
     /**
@@ -140,7 +155,8 @@ export default class ArticleAdd extends Component {
                 shareDesc:description, 
                 tagId:selectTagId, 
                 tagName:selectTagValue, 
-                content:htmlValue
+                content:htmlValue,
+                userIcon: localStorage.getItem("headUrl"),
             }
             $post(url, params, errIcon).then(data => {
                 if(data) {
@@ -171,6 +187,8 @@ export default class ArticleAdd extends Component {
      * save imgUrl for show
      */
     saveImgUrl = (type,url) => {
+        console.log(url);
+        console.log('url');
         this.setState({ [type]: url })
     }
 
